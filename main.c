@@ -6,7 +6,7 @@
 /*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:06:35 by ancarret          #+#    #+#             */
-/*   Updated: 2025/06/06 11:12:20 by ancarret         ###   ########.fr       */
+/*   Updated: 2025/07/07 10:50:45 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,18 @@ void cleanup_iteration(t_data *data, char *cwd, char *prompt)
         free(prompt);
 }
 
+void is_built_in(char **args)
+{
+    if (ft_strcmp(args[0], "pwd") == 0)
+        return (ft_pwd());
+}
+
 int main(int argc, char **argv, char **envp)
 {
     char *cwd;
     char *prompt;
 	t_data data;
+    t_command *aux;
 
 	(void)argc;
 	(void)argv;
@@ -56,6 +63,12 @@ int main(int argc, char **argv, char **envp)
         add_history(data.input_line);
 		lexer(&data);
         parser(&data);
+        aux = data.commands;
+        while (aux) //Aqui imagino que tendras que recorrer los comandos para ejecutarlos, no se
+        { //He hecho esto para comprobar si alguno de los comandos es un built in
+            is_built_in(aux->args);
+            aux = aux->next;
+        }
         cleanup_iteration(&data, cwd, prompt);
     }
     return (0);

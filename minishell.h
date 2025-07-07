@@ -6,7 +6,7 @@
 /*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:07:21 by ancarret          #+#    #+#             */
-/*   Updated: 2025/06/06 11:20:46 by ancarret         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:01:25 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,11 @@ void free_commands(t_command *cmd);
 
 /*get_commands*/
 t_command *get_next_command(t_data *data, int reset);
+
+/***********************************************
+                    BUILT-INS
+************************************************/
+
+int ft_pwd(void);
 
 #endif
