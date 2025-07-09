@@ -6,7 +6,7 @@
 /*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:06:35 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/09 12:26:29 by ancarret         ###   ########.fr       */
+/*   Updated: 2025/07/09 12:49:25 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,15 @@ void free_env(char **envp)
     free(envp);
 }
 
-void cleanup_iteration(t_data *data, char *cwd, char *prompt)
+void cleanup_iteration(t_data *data, char *prompt)
 {
     if (data->input_line)
     {
         free(data->input_line);
         data->input_line = NULL;
     }
-    if (cwd)
-        free(cwd);
     if (prompt)
         free(prompt);
-    if (data->envp)
-        free_env(data->envp);
 }
 
 int is_built_in(char **args, char **envp)
@@ -73,9 +69,28 @@ int is_built_in(char **args, char **envp)
     return (0);
 }
 
-int main(int argc, char **argv, char **envp)
+char *get_prompt(void)
 {
     char *cwd;
+    char *tmp1;
+    char *tmp2;
+    char *prompt;
+
+    cwd = getcwd(NULL, 0);
+    if (!cwd)
+        return (ft_strdup(GREEN "$ minishell> " WHITE));
+    tmp1 = ft_strjoin(BLUE, cwd);
+    tmp2 = ft_strjoin(tmp1, WHITE " ");
+    free(tmp1);
+    tmp1 = ft_strjoin(tmp2, GREEN "$ minishell> " WHITE);
+    free(tmp2);
+    free(cwd);
+    prompt = tmp1;
+    return (prompt);
+}
+
+int main(int argc, char **argv, char **envp)
+{
     char *prompt;
 	t_data data;
     t_command *aux;
@@ -85,12 +100,11 @@ int main(int argc, char **argv, char **envp)
     initialize_data(&data, envp);
     while(1)
     {
-        cwd = getcwd(NULL, 0);
-        prompt = ft_strjoin(cwd, "$ minishell> ");
+        prompt = get_prompt();
         data.input_line = readline(prompt);
         if (!data.input_line)
         {
-            cleanup_iteration(&data, cwd, prompt);
+            cleanup_iteration(&data, prompt);
             break ;
         }
         add_history(data.input_line);
@@ -102,7 +116,8 @@ int main(int argc, char **argv, char **envp)
             is_built_in(aux->args, data.envp);
             aux = aux->next;
         }
-        cleanup_iteration(&data, cwd, prompt);
+        cleanup_iteration(&data, prompt);
     }
+    free_env(data.envp);
     return (0);
 }
