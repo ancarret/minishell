@@ -126,4 +126,12 @@ int ft_pwd(void);
 int ft_echo(char **args);
 int ft_env(char **envp);
 
+
+/***********************************************
+                    EXECUTOR
+************************************************/
+
+int     execute_commands(t_command *commands, char **envp);
+void    execute_child(t_command cmd, char **envp);
+
 #endif
