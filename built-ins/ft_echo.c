@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almudenalopezrodriguez <almudenalopezro    +#+  +:+       +#+        */
+/*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 11:07:25 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/08 11:23:36 by almudenalop      ###   ########.fr       */
+/*   Created: 2025/07/09 13:16:02 by ancarret          #+#    #+#             */
+/*   Updated: 2025/07/09 13:16:07 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

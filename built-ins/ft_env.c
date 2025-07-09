@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almudenalopezrodriguez <almudenalopezro    +#+  +:+       +#+        */
+/*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 11:07:32 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/08 12:12:38 by almudenalop      ###   ########.fr       */
+/*   Created: 2025/07/09 13:16:15 by ancarret          #+#    #+#             */
+/*   Updated: 2025/07/09 13:16:18 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
