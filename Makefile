@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+         #
+#    By: almudenalopezrodriguez <almudenalopezro    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/29 10:51:46 by ancarret          #+#    #+#              #
-#    Updated: 2025/07/07 10:30:14 by ancarret         ###   ########.fr        #
+#    Updated: 2025/07/08 12:07:38 by almudenalop      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = minishell
 SRCS = main.c \
 		lexer/lexer.c lexer/lexer_utils.c lexer/tokenizer.c lexer/tokenizer_utils.c \
 		lexer/get_tokens.c parser/parser.c parser/parser_utils.c parser/get_commands.c \
-		built-ins/ft_pwd.c
+		built-ins/ft_pwd.c built-ins/ft_echo.c built-ins/ft_env.c
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBS = -lreadline

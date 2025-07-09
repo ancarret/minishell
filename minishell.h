@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almudenalopezrodriguez <almudenalopezro    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:07:21 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/07 11:01:25 by ancarret         ###   ########.fr       */
+/*   Updated: 2025/07/08 12:07:13 by almudenalop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_data
     char *input_line;
     t_command *commands;
     t_token *tokens;
+    char **envp;
 } t_data;
 
 /***********************************************
@@ -118,5 +119,7 @@ t_command *get_next_command(t_data *data, int reset);
 ************************************************/
 
 int ft_pwd(void);
+int ft_echo(char **args);
+int ft_env(char **envp);
 
 #endif
