@@ -3,31 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almudenalopezrodriguez <almudenalopezro    +#+  +:+       +#+        */
+/*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:06:35 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/08 12:03:26 by almudenalop      ###   ########.fr       */
+/*   Updated: 2025/07/09 12:49:25 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void initialize_data(t_data *data)
+void initialize_data(t_data *data, char **envp)
 {
+    int i;
+    int count;
+    
     data->commands = NULL;
     data->input_line = NULL;
     data->tokens = NULL;
+    count = 0;
+    while (envp[count])
+        count++;
+    data->envp = malloc(sizeof(char *) * (count + 1));
+    i = 0;
+    while (i < count)
+    {
+        data->envp[i] = ft_strdup(envp[i]);
+        i++;
+    }
+    data->envp[i] = NULL;
+    
 }
 
-void cleanup_iteration(t_data *data, char *cwd, char *prompt)
+void free_env(char **envp)
+{
+    int i = 0;
+    if (!envp)
+        return;
+    while (envp[i])
+    {
+        free(envp[i]);
+        i++;
+    }
+    free(envp);
+}
+
+void cleanup_iteration(t_data *data, char *prompt)
 {
     if (data->input_line)
     {
         free(data->input_line);
         data->input_line = NULL;
     }
-    if (cwd)
-        free(cwd);
     if (prompt)
         free(prompt);
 }
@@ -43,24 +69,42 @@ int is_built_in(char **args, char **envp)
     return (0);
 }
 
-int main(int argc, char **argv, char **envp)
+char *get_prompt(void)
 {
     char *cwd;
+    char *tmp1;
+    char *tmp2;
+    char *prompt;
+
+    cwd = getcwd(NULL, 0);
+    if (!cwd)
+        return (ft_strdup(GREEN "$ minishell> " WHITE));
+    tmp1 = ft_strjoin(BLUE, cwd);
+    tmp2 = ft_strjoin(tmp1, WHITE " ");
+    free(tmp1);
+    tmp1 = ft_strjoin(tmp2, GREEN "$ minishell> " WHITE);
+    free(tmp2);
+    free(cwd);
+    prompt = tmp1;
+    return (prompt);
+}
+
+int main(int argc, char **argv, char **envp)
+{
     char *prompt;
 	t_data data;
     t_command *aux;
 
 	(void)argc;
 	(void)argv;
-    initialize_data(&data);
+    initialize_data(&data, envp);
     while(1)
     {
-        cwd = getcwd(NULL, 0);
-        prompt = ft_strjoin(cwd, "$ minishell> ");
+        prompt = get_prompt();
         data.input_line = readline(prompt);
         if (!data.input_line)
         {
-            cleanup_iteration(&data, cwd, prompt);
+            cleanup_iteration(&data, prompt);
             break ;
         }
         add_history(data.input_line);
@@ -69,10 +113,11 @@ int main(int argc, char **argv, char **envp)
         aux = data.commands;
         while (aux) //Aqui imagino que tendras que recorrer los comandos para ejecutarlos, no se
         { //He hecho esto para comprobar si alguno de los comandos es un built in
-            is_built_in(aux->args, envp);
+            is_built_in(aux->args, data.envp);
             aux = aux->next;
         }
-        cleanup_iteration(&data, cwd, prompt);
+        cleanup_iteration(&data, prompt);
     }
+    free_env(data.envp);
     return (0);
 }
