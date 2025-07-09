@@ -13,10 +13,21 @@
 CC = cc
 FLAGS = -Wall -Werror -Wextra 
 NAME = minishell
-SRCS = main.c \
-		lexer/lexer.c lexer/lexer_utils.c lexer/tokenizer.c lexer/tokenizer_utils.c \
-		lexer/get_tokens.c parser/parser.c parser/parser_utils.c parser/get_commands.c \
-		built-ins/ft_pwd.c built-ins/ft_echo.c built-ins/ft_env.c
+SRCS = 			main.c \
+				lexer/lexer.c \
+				lexer/lexer_utils.c \
+				lexer/tokenizer.c \
+				lexer/tokenizer_utils.c \
+				lexer/get_tokens.c \
+				parser/parser.c \
+				parser/parser_utils.c \
+				parser/get_commands.c \
+				built-ins/ft_pwd.c \
+				built-ins/ft_echo.c \
+				built-ins/ft_env.c \
+				executor/execute.c \
+				executor/child.c
+
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBS = -lreadline

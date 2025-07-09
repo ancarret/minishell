@@ -58,6 +58,7 @@ void cleanup_iteration(t_data *data, char *prompt)
         free(prompt);
 }
 
+
 int is_built_in(char **args, char **envp)
 {
     if (ft_strcmp(args[0], "pwd") == 0)
@@ -87,37 +88,31 @@ char *get_prompt(void)
     free(cwd);
     prompt = tmp1;
     return (prompt);
-}
+ }
 
 int main(int argc, char **argv, char **envp)
 {
-    char *prompt;
-	t_data data;
-    t_command *aux;
+  char *prompt;
+  t_data data;
 
 	(void)argc;
 	(void)argv;
-    initialize_data(&data, envp);
-    while(1)
-    {
-        prompt = get_prompt();
-        data.input_line = readline(prompt);
-        if (!data.input_line)
-        {
-            cleanup_iteration(&data, prompt);
-            break ;
-        }
-        add_history(data.input_line);
-		lexer(&data);
-        parser(&data);
-        aux = data.commands;
-        while (aux) //Aqui imagino que tendras que recorrer los comandos para ejecutarlos, no se
-        { //He hecho esto para comprobar si alguno de los comandos es un built in
-            is_built_in(aux->args, data.envp);
-            aux = aux->next;
-        }
-        cleanup_iteration(&data, prompt);
-    }
-    free_env(data.envp);
-    return (0);
+  initialize_data(&data, envp);
+  while(1)
+  {
+      prompt = get_prompt();
+      data.input_line = readline(prompt);
+      if (!data.input_line)
+      {
+          cleanup_iteration(&data, prompt);
+          break ;
+      }
+      add_history(data.input_line);
+      lexer(&data);
+      parser(&data);
+      execute_commands(data.commands, envp);
+      cleanup_iteration(&data, cwd, prompt);
+  }
+  free_env(data.envp);
+  return (0);
 }
