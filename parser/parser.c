@@ -6,7 +6,7 @@
 /*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 08:56:03 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/07 10:31:47 by ancarret         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:09:08 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ void parser(t_data *data)
         add_command(&data->commands, command);
         reset = 0;
     }
-    print_command(data->commands);
+    //print_command(data->commands);
 }

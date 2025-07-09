@@ -6,7 +6,7 @@
 /*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 08:00:36 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/09 11:39:41 by ancarret         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:06:40 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ void lexer(t_data *data)
         add_token(&data->tokens, token);
         reset = 0;
     }
-    print_tokens(data->tokens);
+    //print_tokens(data->tokens);
 }
