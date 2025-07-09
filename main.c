@@ -6,7 +6,7 @@
 /*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:06:35 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/09 12:49:25 by ancarret         ###   ########.fr       */
+/*   Updated: 2025/07/09 15:20:45 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int main(int argc, char **argv, char **envp)
         aux = data.commands;
         while (aux) //Aqui imagino que tendras que recorrer los comandos para ejecutarlos, no se
         { //He hecho esto para comprobar si alguno de los comandos es un built in
-            is_built_in(aux->args, data.envp);
+            data.last_exit_code = is_built_in(aux->args, data.envp);
             aux = aux->next;
         }
         cleanup_iteration(&data, prompt);

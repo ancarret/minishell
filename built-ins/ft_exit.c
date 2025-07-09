@@ -6,7 +6,7 @@
 /*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:07:12 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/09 13:31:38 by ancarret         ###   ########.fr       */
+/*   Updated: 2025/07/09 15:28:07 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,27 @@ exit foo bar	exit + error numérico	            2	                Sí
 exit >max_int	exit + error numérico	            2	                Sí
 */
 
-int ft_exit(char **args)
+static int count_args (char **args)
 {
-    
+    int i;
+
+    i = 0;
+    while (args[i])
+        i++;
+    return (i);
+}
+
+int ft_exit(t_data *data, char **args)
+{
+    int num_args;
+    int exit_code;
+
+    num_args = count_args(args);
+    if (num_args == 1)
+        exit(data->last_exit_code);
+    else if (num_args == 2)
+    {
+        exit_code = ft_atoi(args[1]);
+        if (args[1])
+    }
 }
