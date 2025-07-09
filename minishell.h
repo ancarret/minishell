@@ -6,7 +6,7 @@
 /*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:07:21 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/09 12:38:18 by ancarret         ###   ########.fr       */
+/*   Updated: 2025/07/09 15:17:28 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_data
     t_command *commands;
     t_token *tokens;
     char **envp;
+    int last_exit_code;
 } t_data;
 
 /***********************************************

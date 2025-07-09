@@ -6,7 +6,7 @@
 /*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:06:35 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/09 12:49:25 by ancarret         ###   ########.fr       */
+/*   Updated: 2025/07/09 15:20:45 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,24 +83,24 @@ int main(int argc, char **argv, char **envp)
     char *prompt;
     t_data data;
 
-	(void)argc;
-	(void)argv;
-  initialize_data(&data, envp);
-  while(1)
-  {
-      prompt = get_prompt();
-      data.input_line = readline(prompt);
-      if (!data.input_line)
-      {
-          cleanup_iteration(&data, prompt);
-          break ;
-      }
-      add_history(data.input_line);
-      lexer(&data);
-      parser(&data);
-      execute_commands(data.commands, envp);
-      cleanup_iteration(&data, prompt);
-  }
-  free_env(data.envp);
-  return (0);
+    (void)argc;
+    (void)argv;
+    initialize_data(&data, envp);
+    while(1)
+    {
+        prompt = get_prompt();
+        data.input_line = readline(prompt);
+        if (!data.input_line)
+        {
+            cleanup_iteration(&data, prompt);
+            break ;
+        }
+        add_history(data.input_line);
+        lexer(&data);
+        parser(&data);
+        execute_commands(data.commands, envp);
+        cleanup_iteration(&data, prompt);
+    }
+    free_env(data.envp);
+    return (0);
 }
