@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almudenalopezrodriguez <almudenalopezro    +#+  +:+       +#+        */
+/*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:07:21 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/08 12:07:13 by almudenalop      ###   ########.fr       */
+/*   Updated: 2025/07/09 12:38:18 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# define BLUE     "\033[34m"
+# define GREEN    "\033[32m"
+# define WHITE    "\033[0m"
 
 # include <unistd.h>
 # include <stdlib.h>
