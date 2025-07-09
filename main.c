@@ -58,18 +58,6 @@ void cleanup_iteration(t_data *data, char *prompt)
         free(prompt);
 }
 
-
-int is_built_in(char **args, char **envp)
-{
-    if (ft_strcmp(args[0], "pwd") == 0)
-        return (ft_pwd());
-    else if (ft_strcmp(args[0], "echo") == 0)
-        return (ft_echo(args));
-    else if (ft_strcmp(args[0], "env") == 0)
-        return (ft_env(envp));
-    return (0);
-}
-
 char *get_prompt(void)
 {
     char *cwd;
@@ -92,8 +80,8 @@ char *get_prompt(void)
 
 int main(int argc, char **argv, char **envp)
 {
-  char *prompt;
-  t_data data;
+    char *prompt;
+    t_data data;
 
 	(void)argc;
 	(void)argv;
@@ -111,7 +99,7 @@ int main(int argc, char **argv, char **envp)
       lexer(&data);
       parser(&data);
       execute_commands(data.commands, envp);
-      cleanup_iteration(&data, cwd, prompt);
+      cleanup_iteration(&data, prompt);
   }
   free_env(data.envp);
   return (0);
