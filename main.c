@@ -3,20 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almudenalopezrodriguez <almudenalopezro    +#+  +:+       +#+        */
+/*   By: ancarret <ancarret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:06:35 by ancarret          #+#    #+#             */
-/*   Updated: 2025/07/08 12:03:26 by almudenalop      ###   ########.fr       */
+/*   Updated: 2025/07/09 12:26:29 by ancarret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void initialize_data(t_data *data)
+void initialize_data(t_data *data, char **envp)
 {
+    int i;
+    int count;
+    
     data->commands = NULL;
     data->input_line = NULL;
     data->tokens = NULL;
+    count = 0;
+    while (envp[count])
+        count++;
+    data->envp = malloc(sizeof(char *) * (count + 1));
+    i = 0;
+    while (i < count)
+    {
+        data->envp[i] = ft_strdup(envp[i]);
+        i++;
+    }
+    data->envp[i] = NULL;
+    
+}
+
+void free_env(char **envp)
+{
+    int i = 0;
+    if (!envp)
+        return;
+    while (envp[i])
+    {
+        free(envp[i]);
+        i++;
+    }
+    free(envp);
 }
 
 void cleanup_iteration(t_data *data, char *cwd, char *prompt)
@@ -30,6 +58,8 @@ void cleanup_iteration(t_data *data, char *cwd, char *prompt)
         free(cwd);
     if (prompt)
         free(prompt);
+    if (data->envp)
+        free_env(data->envp);
 }
 
 int is_built_in(char **args, char **envp)
@@ -52,7 +82,7 @@ int main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-    initialize_data(&data);
+    initialize_data(&data, envp);
     while(1)
     {
         cwd = getcwd(NULL, 0);
@@ -69,7 +99,7 @@ int main(int argc, char **argv, char **envp)
         aux = data.commands;
         while (aux) //Aqui imagino que tendras que recorrer los comandos para ejecutarlos, no se
         { //He hecho esto para comprobar si alguno de los comandos es un built in
-            is_built_in(aux->args, envp);
+            is_built_in(aux->args, data.envp);
             aux = aux->next;
         }
         cleanup_iteration(&data, cwd, prompt);
