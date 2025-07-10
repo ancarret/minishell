@@ -40,5 +40,5 @@ void lexer(t_data *data)
         add_token(&data->tokens, token);
         reset = 0;
     }
-    print_tokens(data->tokens);
+    //print_tokens(data->tokens);
 }

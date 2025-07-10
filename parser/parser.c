@@ -56,5 +56,5 @@ void parser(t_data *data)
         add_command(&data->commands, command);
         reset = 0;
     }
-    print_command(data->commands);
+    //print_command(data->commands);
 }
