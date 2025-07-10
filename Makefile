@@ -26,7 +26,8 @@ SRCS = 			main.c \
 				built-ins/ft_echo.c \
 				built-ins/ft_env.c \
 				executor/execute.c \
-				executor/child.c
+				executor/child.c \
+				executor/pipe.c
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a

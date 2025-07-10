@@ -134,4 +134,13 @@ int ft_env(char **envp);
 int     execute_commands(t_command *commands, char **envp);
 void    execute_child(t_command cmd, char **envp);
 
+
+
+/***********************************************
+                    PIPES
+************************************************/
+
+void initialize_pipe(int pipefd[2], int i, int n);
+void redirect_pipe(int pipefd[2], int i, int n, int last_pipe);
+
 #endif
